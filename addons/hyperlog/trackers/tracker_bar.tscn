@@ -1,20 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dbandiwqp251y"]
 
-[ext_resource path="res://addons/hyperlog/trackers/tracker_bar.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/hyperlog/trackers/TrackerBar.cs" id="1_mnxoe"]
 
 [node name="logger_bar" type="VBoxContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -1220.0
 offset_bottom = -710.0
-minimum_size = Vector2( 60, 10 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("1_mnxoe")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
-offset_right = 60.0
-offset_bottom = 2.0
-percent_visible = false
+layout_mode = 2

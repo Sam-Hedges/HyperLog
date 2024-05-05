@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c6hf22a3rqheq"]
 
-[ext_resource path="res://addons/hyperlog/trackers/tracker_color.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/hyperlog/trackers/TrackerColor.cs" id="1_lnp00"]
 
 [node name="logger_color" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_bottom = -500.0
-minimum_size = Vector2( 0, 160 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lnp00")

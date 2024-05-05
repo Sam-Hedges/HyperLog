@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dkgwe3j8h4ol3"]
 
-[ext_resource type="Script" path="res://addons/hyperlog/log_container.gd" id="1"]
 [ext_resource type="Material" uid="uid://bfcius4ai3u24" path="res://addons/hyperlog/log_container.material" id="1_i7b0d"]
+[ext_resource type="Script" path="res://addons/hyperlog/LogContainer.cs" id="2_xyr8p"]
 
 [sub_resource type="StyleBoxFlat" id="3"]
 border_width_left = 8
@@ -25,7 +25,7 @@ offset_right = -1180.0
 offset_bottom = -704.0
 size_flags_vertical = 15
 theme = SubResource("4")
-script = ExtResource("1")
+script = ExtResource("2_xyr8p")
 
 [node name="Container" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
