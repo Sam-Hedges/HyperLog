@@ -18,12 +18,14 @@ The intention is to improve this project with the goal of either merging it with
 - Update the syntax to be more c# oriented
 - Improve StringFormat utility
 - Fix scaling issues at non 16:9 aspect ratios
+- Fix the 3D example scene and improve the 3D version
 - Figure out the rest of this list!!!
 
 ## Things to Keep in Mind
 
 - As this is a wip the syntax is still very idiomatically similar to gdscript
 - There still may be undiscovered bugs (Please raise any issues if you find any!)
+- Currently this works better in 2D than 3D
 
 ## How to use it in your Project 🤷♂️
 
