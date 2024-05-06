@@ -15,6 +15,7 @@ public partial class TrackerText : Tracker
     public override void _Process(double delta)
     {
         if (!container.Tracking) return;
+        if (!_insideViewport) return;
         for (int i = 0; i < monitors.Count; i++)
         {
             ValueMonitor monitor = monitors[i];

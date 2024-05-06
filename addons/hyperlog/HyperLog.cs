@@ -9,7 +9,7 @@ public partial class HyperLog : Node
     private static CanvasLayer _canvas;
     private static Sketchboard _sketchboard;
     public static List<Color> colors = new();
-    internal static Camera3D Camera3D = null;
+    public static Camera3D Camera3D = null;
 
     private static List<LogContainer> _containers = new();
 

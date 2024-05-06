@@ -47,6 +47,7 @@ public partial class TrackerGraph : Tracker
     public override void _PhysicsProcess(double delta)
     {
         if (!container.Tracking) return;
+        if (!_insideViewport) return;
         _step -= 1;
         if (_step < step_size)
         {
@@ -59,6 +60,7 @@ public partial class TrackerGraph : Tracker
     public override void _Process(double delta)
     {
         if (!container.Tracking) return;
+        if (!_insideViewport) return;
         if (_dirty)
         {
             QueueRedraw();

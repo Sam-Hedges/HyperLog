@@ -17,6 +17,7 @@ public partial class TrackerColor : Tracker
     public override void _Process(double delta)
     {
         if (!container.Tracking) return;
+        if (!_insideViewport) return;
         foreach (ValueMonitor tracker in monitors)
         {
             backlog.Insert(0, $"{tracker.property}\t{tracker.Format(tracker.GetValue())}");

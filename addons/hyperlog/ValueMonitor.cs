@@ -88,14 +88,12 @@ public partial class ValueMonitor : Resource
             {
                 if (value.Obj is Vector2)
                 {
-                    object temp = $"({string.Format(formatString, ((Vector2)value).X)}, {string.Format(formatString, ((Vector2)value).Y)})";
                     return StringFormat.Format(formatString, value, out err);
                 }
 
                 if (value.Obj is Vector3)
                 {
-                    return
-                        $"({string.Format(formatString, ((Vector3)value).X)}, {string.Format(formatString, ((Vector3)value).Y)}, {string.Format(formatString, ((Vector3)value).Z)})";
+                    return StringFormat.Format(formatString, value, out err);
                 }
 
                 return StringFormat.Format(formatString, value, out err);

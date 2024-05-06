@@ -16,6 +16,7 @@ public partial class LogPrint : Tracker
 
     public override void _Process(double delta)
     {
+        if (!_insideViewport) return;
         foreach (ValueMonitor monitor in monitors)
         {
             _backlog.Insert(0, $"{monitor.property}\t{monitor.Format(monitor.GetValue())}");

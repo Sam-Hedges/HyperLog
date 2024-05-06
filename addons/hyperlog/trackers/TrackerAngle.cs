@@ -22,12 +22,14 @@ public partial class TrackerAngle : Tracker
     public override void _PhysicsProcess(double delta)
     {
         if (!container.Tracking) return;
+        if (!_insideViewport) return;
         TrackersStoreValue();
     }
 
     public override void _Process(double delta)
     {
         if (!container.Tracking) return;
+        if (!_insideViewport) return;
         QueueRedraw();
     }
 

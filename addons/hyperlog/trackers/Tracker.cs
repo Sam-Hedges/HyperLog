@@ -6,6 +6,7 @@ public partial class Tracker : Control
 {
     public List<ValueMonitor> monitors = new();
     public LogContainer container;
+    internal bool _insideViewport => GetViewportRect().Encloses(GetRect());
 
     public void Track(object properties, object node = null)
     {

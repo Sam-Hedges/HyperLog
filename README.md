@@ -1,166 +1,221 @@
-# ✨ HyperLog ✨
-*For Godot 4 - [Godot 3 version here](https://github.com/GuyUnger/HyperLog/tree/godot-3)*
+## ✨ HyperLog-CSharp ✨
 
-**HyperLog** allows you to easily track node variables and information on screen.
+_For Godot 4 with C# support - [Original HyperLog for GDScript](https://github.com/GuyUnger/HyperLog)_
 
-It allows you to log and graph information while in the game, making debugging much easier.
+**HyperLog-CSharp** is a C# port of the original **HyperLog** utility for Godot. It allows you to easily track node variables and information on screen, making debugging much easier.
 
+**HyperLog-CSharp** maintains all the original functionality, but utilizes C# scripts, catering to developers who prefer to use C# with Godot. The project is currently a work in progress, but fully functional.
+
+Special thanks to [GuyUnger](https://github.com/GuyUnger) for creating the GDScript version of which this is built!
 
 [![Watch the video](https://img.youtube.com/vi/tZ3UGLp86l8/hqdefault.jpg)](https://youtu.be/tZ3UGLp86l8)
 
+## Future Plans 🚀
 
-### How to use it in your Project 🤷‍♂️
+The intention is to improve this project with the goal of either merging it with the original **HyperLog** or supporting it as a separate version. Contributions and feedback are welcome!
 
-First step is to download and install the addon either from here or from the Godot Asset library (we recommend using the version here).
+### TODO
+- Update the syntax to be more c# oriented
+- Improve StringFormat utility
+- Fix scaling issues at non 16:9 aspect ratios
+- Figure out the rest of this list!!!
 
-After activating the addon in Godot, you will be able to use **HyperLog** via the `HyperLog` global.
+## Things to Keep in Mind
+
+- As this is a wip the syntax is still very idiomatically similar to gdscript
+- There still may be undiscovered bugs (Please raise any issues if you find any!)
+
+## How to use it in your Project 🤷♂️
+
+First, download or clone this repo.
+
+Copy the `hyperlog` directory into your `res://addons/` directory.
+
+Open `Project / Project Settings / Plugins` and enable the HyperLog addon
+
+After activating the addon in Godot, you will be able to use **HyperLog-CSharp** via the `HyperLog` global.
 
 ### HyperLog for 3D / Spatial nodes
 
-To use **HyperLog in 3D or on Spatial nodes** you need to set the `camera_3d` variable on `HyperLog`:
+To use **HyperLog in 3D or on Spatial nodes** you need to set the `Camera3D` variable on `HyperLog`:
 
-```swift
-HyperLog.camera_3d = $Camera
+```csharp
+HyperLog.Camera3D = GetNode<Camera3D>("Camera");
 ```
+
 If you don't do that, all logs will be displayed on the top-left corner.
 
+## Example Scenes
 
-# Example Scenes 
+Inside the project, you will find example scenes showcasing how **HyperLog** is used in 2D and 3D. We highly recommend checking them out.
 
-Inside the project, you will find example scenes how **HyperLog** is used in 2D and 3D. We highly recommend checking them out.
-
-# Example
+## Example
 
 We have a Scene called `Player_Ship` with the following variables in its script:
-```swift
-extends KinematicBody2D
 
-var position = Vector2(10.241, 282.2035)
-var direction = Vector2(-1, 0)
-var angle = 1.570796
-var health_current = 8
-var health_max = 12
-var speed = 0.0
+```csharp
+using Godot;
+using System;
 
-onready var ship = self
+public class PlayerShip : KinematicBody2D
+{
+    public Vector2 position = new Vector2(10.241f, 282.2035f);
+    public Vector2 direction = new Vector2(-1, 0);
+    public float angle = 1.570796f;
+    public int health_current = 8;
+    public int health_max = 12;
+    public float speed = 0.0f;
 
-func _ready():
-    ...
+    private PlayerShip ship;
+
+    public override void _Ready()
+    {
+        ship = this;
+        ...
+    }
+}
 ```
 
-To use **HyperLog** to track any of these variables (or properties from the class), **add these snippets to your `_ready` function**.
+To use **HyperLog** to track any of these variables (or properties from the class), **add these snippets to your `_Ready()` function**.
 
-You do not have to add it to `_process` or `_physics_process` or update it in any other way, the changes of the variables are tracked automatically by **HyperLog**.
+You do not have to add it to `_Process()` or `_PhysicsProcess()` or update it in any other way, the changes of the variables are tracked automatically by **HyperLog**.
 
-# Functions available
-## Log text
+## Functions available
+
+### Log text
+
 > Displays the **text**: `position:x 10` next to the `ship` node.
-```swift
-HyperLog.log(ship).text("position:x>round")
+
+```csharp
+HyperLog.Log(ship).Text("position:x>round");
 ```
 
 > Displays the **text**: `direction 3.141593`.
-```swift
-HyperLog.log(ship).text("direction>angle")
+
+```csharp
+HyperLog.Log(ship).Text("direction>angle");
 ```
 
 > Displays the **text**: `position (10.24, 282.20)` next to `self` (in our example, the ship).
-```swift
-HyperLog.log(self).text("position>%0.2f")
+
+```csharp
+HyperLog.Log(this).Text("position>%0.2f");
 ```
 
-## Log color
+### Log color
+
 > Logs the rotation of the ship's `gun` to the log-panel of the ship.
-```swift
-HyperLog.log(ship).color("modulate")
+
+```csharp
+HyperLog.Log(ship).Color("modulate");
 ```
 
-## Log line-chart / graph
+### Log line-chart / graph
+
 > Draws a line chart **graph** out the x and y `position` of the ship.
-```swift
-HyperLog.log(ship).graph("position")
+
+```csharp
+HyperLog.Log(ship).Graph("position");
 ```
 
 > Draws a line chart **graph** out of `speed`, rounds it to one decimal and updates it every second frame.
-```swift
-HyperLog.log(ship).graph("speed>%0.1f").set_steps(2)
+
+```csharp
+HyperLog.Log(ship).Graph("speed>%0.1f").SetSteps(2);
 ```
 
 > Draws a line chart **graph** out the `health`, using `health_max` as the maximum value of the line-chart.
-```swift
-HyperLog.log(ship).graph("health_current").set_range(0, health_max)
+
+```csharp
+HyperLog.Log(ship).Graph("health_current").SetRange(0, health_max);
 ```
 
-## Log angles
-> Draws an **angle**-log, a visual angle indicator.
-```swift
-HyperLog.log(ship).angle(["direction", "angle"])
+### Log angles
+
+> Draws an **angle**\-log, a visual angle indicator.
+
+```csharp
+HyperLog.Log(ship).Angle(new[] { "direction", "angle" });
 ```
 
-> Draws an **angle**-log of the `rotation` of the ship's `gun` to the log-panel of the `ship`.
-```swift
-HyperLog.log(ship).angle("rotation", ship.get_node("gun"))
+> Draws an **angle**\-log of the `rotation` of the ship's `gun` to the log-panel of the `ship`.
+
+```csharp
+HyperLog.Log(ship).Angle("rotation", ship.GetNode("gun"));
 ```
 
-
-## Change the Log Panel position
+### Change the Log Panel position
 
 > Adds an **offset** of (200, -20) to the panel.
-```swift
-HyperLog.log(ship).offset(Vector2(200, -20))
+
+```csharp
+HyperLog.Log(ship).Offset(new Vector2(200, -20));
 ```
 
 > Will **align** the panel to the right horizontally and to the center vertically.
-```swift
-HyperLog.log(ship).align(HALIGN_RIGHT, VALIGN_CENTER)
+
+```csharp
+HyperLog.Log(ship).Align(HyperLog.HAlignRight, HyperLog.VAlignCenter);
 ```
 
 > Will display a health line-chart **graph** above the ship.
-```swift
-HyperLog.log(ship).align(HALIGN_CENTER, VALIGN_BOTTOM).offset(Vector2(0, - 50)).graph("health_current").set_range(0, health_max)
+
+```csharp
+HyperLog.Log(ship)
+    .Align(HyperLog.HAlignCenter, HyperLog.VAlignBottom)
+    .Offset(new Vector2(0, -50))
+    .Graph("health_current")
+    .SetRange(0, health_max);
 ```
 
+### Logging to the top main panel
 
-# Logging to the top main panel
+Alternatively, you can log to the main panel by accessing the functions directly from **HyperLog**:
 
-Alternatively you can log to the main panel by accessing the functions directly from **HyperLog**:
-
-```swift
-HyperLog.graph("position", ship)
+```csharp
+HyperLog.Graph("position", ship);
 ```
 
-# Drawing Tools / Sketch functions
+### Drawing Tools / Sketch functions
 
-There are some drawing tools that you can use for additional debugging.
+There are some drawing tools that you can use for additional debugging. You can call those from anywhere to draw visual debugging elements.
 
-You can call those from anywhere to draw visual debugging elements.
-
-For example calling `HyperLog.sketch_arrow(position, direction, 1)` will draw an arrow on position, direction for one second.
+For example, calling `HyperLog.SketchArrow(position, direction, 1)` will draw an arrow on position, direction for one second.
 
 **These draw tools behave differently from the normal HyperLog logging and will not automatically update!**
 
-**You can use them in _process or on certain functions in your game (e.g. display the direction of your projectile when shooting via HyperLog.sketch_line.**
+**You can use them in \_Process() or on certain functions in your game (e.g. display the direction of your projectile when shooting via HyperLog.SketchLine).**
 
 It's best to check out the provided example scenes or the code in the plugin to get a better understanding of those draw tools.
 
 ### Sketch Functions reference
+
 > Draw a line from `from` to `to` for `duration` seconds.
-```swift
-HyperLog.sketch_line(from:Vector2, to:Vector2, duration:float = 0, color:Color = Color.tomato)
+
+```csharp
+HyperLog.SketchLine(new Vector2(0, 0), new Vector2(1, 1), 0, new Color("tomato"));
 ```
+
 > Draw an arrow at `position`, pointing to `vector` for `duration` seconds.
-```swift
-HyperLog.sketch_arrow(position:Vector2, vector:Vector2, duration:float = 0, color:Color = Color.tomato)
+
+```csharp
+HyperLog.SketchArrow(new Vector2(0, 0), new Vector2(1, 1), 0, new Color("tomato"));
 ```
+
 > Draw a circle at `position` with the radius `radius` for `duration` seconds.
-```swift
-HyperLog.sketch_circle(position:Vector2, radius:float, duration:float = 0, color:Color = Color.tomato)
+
+```csharp
+HyperLog.SketchCircle(new Vector2(0, 0), 10.0f, 0, new Color("tomato"));
 ```
+
 > Draw a box at `position` with the dimensions `size` for `duration` seconds.
-```swift
-HyperLog.sketch_box(position:Vector2, size:Vector2, duration:float = 0, color:Color = Color.tomato)
+
+```csharp
+HyperLog.SketchBox(new Vector2(0, 0), new Vector2(10, 10), 0, new Color("tomato"));
 ```
+
 > Draw a Rect2 with the data from `rect` for `duration` seconds.
-```swift
-HyperLog.sketch_rect(rect:Rect2, duration:float = 0, color:Color = Color.tomato)
+
+```csharp
+HyperLog.SketchRect(new Rect2(0, 0, 10, 10), 0, new Color("tomato"));
 ```

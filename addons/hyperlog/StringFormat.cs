@@ -399,7 +399,7 @@ public static class StringFormat
         int initialLen = numberStr.Length;
 
         // Padding. Leave room for sign later if required.
-        int padCharsCount = val < 0 ? minChars - 1 : minChars;
+        int padCharsCount = Math.Abs(val) < 0 ? minChars - 1 : minChars;
         string padChar = (padWithZeros && isFinite) ? "0" : " ";
         if (leftJustified)
             numberStr = numberStr.PadRight(padCharsCount, padChar[0]);
